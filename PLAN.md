@@ -1,4 +1,4 @@
-# Fairkauf – klickbarer Prototyp (Käufer-Sicht)
+# Antrasi – klickbarer Prototyp (Käufer-Sicht)
 
 Ziel: zeigen, wie ein Second-Hand-Marktplatz ehrlicher mit Preis, Schutz und Streitfällen umgeht.
 Stil A „Kassenbon“: warmes Papier #F6F1E7, tiefes Grün #1F4D3A, Tinte #1F2A24, gestrichelte Belegzeilen.

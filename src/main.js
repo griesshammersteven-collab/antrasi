@@ -72,9 +72,9 @@ function shell(inner) {
   return `
   <header class="sticky top-0 z-20 bg-paper/90 backdrop-blur border-b border-line">
     <div class="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
-      <a href="#/" class="flex items-center gap-2.5 min-h-11" aria-label="Fairkauf, zur Startseite">
+      <a href="#/" class="flex items-center gap-2.5 min-h-11" aria-label="Antrasi, zur Startseite">
         <span class="grid place-items-center w-9 h-9 rounded-xl bg-pine text-paper">${ic(iCheck, 'w-5 h-5')}</span>
-        <span class="font-display text-2xl font-semibold tracking-tight">Fairkauf</span>
+        <span class="font-display text-2xl font-semibold tracking-tight">Antrasi</span>
       </a>
       <nav class="flex items-center gap-1 text-sm font-semibold" aria-label="Hauptnavigation">
         <a href="#/" class="px-3 min-h-11 inline-flex items-center rounded-xl hover:bg-paper2">Entdecken</a>
@@ -102,7 +102,7 @@ function home() {
       <section class="grid md:grid-cols-[1.15fr_.85fr] gap-10 md:gap-16 items-center">
         <div>
           <h1 class="text-[2.6rem] md:text-6xl font-semibold leading-[1.02]">Der Preis, den Du siehst, ist der Preis, den Du zahlst.</h1>
-          <p class="mt-5 text-lg text-mute max-w-[46ch]">Bei Fairkauf steht der Endpreis schon im Feed. Käuferschutz buchst Du nur, wenn Du ihn willst.</p>
+          <p class="mt-5 text-lg text-mute max-w-[46ch]">Bei Antrasi steht der Endpreis schon im Feed. Käuferschutz buchst Du nur, wenn Du ihn willst.</p>
           <button id="go" class="btn btn-primary mt-7">Stöbern</button>
         </div>
         <div class="md:rotate-[-1.5deg]" aria-label="Beispiel für einen Beleg">
@@ -247,7 +247,7 @@ function checkout(id) {
           <fieldset class="grid gap-2">
             <legend class="text-xl font-semibold mb-2">Bezahlen</legend>
             ${['Karte', 'PayPal (Artikel und Dienstleistung)', 'Sofortüberweisung'].map((l, n) => `<label class="${choice}"><input type="radio" name="pay" value="${l}" ${n === 0 ? 'checked' : ''} class="accent-pine w-5 h-5" />${l}</label>`).join('')}
-            <p class="text-sm text-mute mt-1">Dein Geld liegt bei Fairkauf, bis Du den Erhalt bestätigst. Der Verkäufer bekommt es erst dann, spätestens nach 7 Tagen.</p>
+            <p class="text-sm text-mute mt-1">Dein Geld liegt bei Antrasi, bis Du den Erhalt bestätigst. Der Verkäufer bekommt es erst dann, spätestens nach 7 Tagen.</p>
           </fieldset>
         </div>
 
@@ -285,7 +285,7 @@ function checkout(id) {
           f.elements[missing].focus()
           return
         }
-        state.order = { id: 'FK-' + (48210 + Math.floor(Math.random() * 90)), itemId: i.id, addr: d, pay: d.pay, ...total(i), protect: !!state.protect[i.id] }
+        state.order = { id: 'AN-' + (48210 + Math.floor(Math.random() * 90)), itemId: i.id, addr: d, pay: d.pay, ...total(i), protect: !!state.protect[i.id] }
         location.hash = '#/bestellung/' + i.id
       })
     },
@@ -304,7 +304,7 @@ function orderView(id) {
           <span class="grid place-items-center w-11 h-11 rounded-full bg-pine text-paper">${ic(iCheck, 'w-6 h-6')}</span>
           <h1 class="text-4xl font-semibold">Bestellt, danke!</h1>
         </div>
-        <p class="mt-3 text-mute">Dein Geld liegt bei Fairkauf. ${esc(sellers[i.seller].name)} verschickt in den nächsten Tagen.</p>
+        <p class="mt-3 text-mute">Dein Geld liegt bei Antrasi. ${esc(sellers[i.seller].name)} verschickt in den nächsten Tagen.</p>
 
         <div class="receipt mt-7">
           <p class="font-mono text-xs text-mute">BELEG ${o.id}</p>
@@ -319,7 +319,7 @@ function orderView(id) {
         </div>
 
         <ol class="mt-9" aria-label="Ablauf">
-          <li class="step done"><span class="dot" aria-hidden="true">${ic(iCheck, 'w-3 h-3')}</span><strong>Bezahlt</strong><br><span class="text-mute text-sm">Das Geld liegt bei Fairkauf.</span></li>
+          <li class="step done"><span class="dot" aria-hidden="true">${ic(iCheck, 'w-3 h-3')}</span><strong>Bezahlt</strong><br><span class="text-mute text-sm">Das Geld liegt bei Antrasi.</span></li>
           <li class="step now" aria-current="step"><span class="dot" aria-hidden="true"></span><strong>Verkäufer versendet</strong><br><span class="text-mute text-sm">Spätestens in 3 Werktagen, sonst erstatten wir automatisch.</span></li>
           <li class="step"><span class="dot" aria-hidden="true"></span><strong>Du bestätigst den Erhalt</strong><br><span class="text-mute text-sm">Erst dann bekommt der Verkäufer sein Geld.</span></li>
         </ol>
@@ -341,7 +341,7 @@ function chat(id) {
   const draw = () => {
     const box = document.getElementById('msgs')
     box.innerHTML = state.chats[i.id].map((m) => m.warn
-      ? `<div class="warn rise" role="alert"><p class="font-semibold text-rust flex items-center gap-2">${ic(iWarn, 'w-5 h-5')}Achtung: Zahlung außerhalb von Fairkauf</p><p class="mt-1 text-sm">Wer Dich bittet, außerhalb der Plattform zu zahlen, will meist den Käuferschutz umgehen. Bei „Freunde und Familie“ oder per Überweisung ist Dein Geld nicht geschützt. <strong>Zahle nur über die Kasse.</strong></p><a class="inline-flex items-center min-h-11 text-sm font-semibold text-pine underline underline-offset-4" href="#/streitfall/${i.id}">Nachricht melden</a></div>`
+      ? `<div class="warn rise" role="alert"><p class="font-semibold text-rust flex items-center gap-2">${ic(iWarn, 'w-5 h-5')}Achtung: Zahlung außerhalb von Antrasi</p><p class="mt-1 text-sm">Wer Dich bittet, außerhalb der Plattform zu zahlen, will meist den Käuferschutz umgehen. Bei „Freunde und Familie“ oder per Überweisung ist Dein Geld nicht geschützt. <strong>Zahle nur über die Kasse.</strong></p><a class="inline-flex items-center min-h-11 text-sm font-semibold text-pine underline underline-offset-4" href="#/streitfall/${i.id}">Nachricht melden</a></div>`
       : `<div class="bubble ${m.from === 'me' ? 'bubble-me' : 'bubble-they'}"><span class="sr-only">${m.from === 'me' ? 'Du' : esc(s.name)}: </span>${esc(m.text)}</div>`).join('')
     box.scrollTop = box.scrollHeight
   }
@@ -436,7 +436,7 @@ function dispute(id) {
     html: shell(`
       <div class="max-w-xl mx-auto">
         ${crumbs('Zurück zur Bestellung', '#/bestellung/' + it.id)}
-        <p class="font-mono text-sm text-mute mt-2">FALL ${state.order?.id ?? 'FK-48211'}-S</p>
+        <p class="font-mono text-sm text-mute mt-2">FALL ${state.order?.id ?? 'AN-48211'}-S</p>
         <h1 class="text-4xl md:text-5xl font-semibold">${decided ? 'Entscheidung liegt vor' : 'Dein Fall ist in Bearbeitung'}</h1>
         <p class="mt-3 text-mute">${esc(it.title)}, ${esc(d.reason)}${d.text ? ', „' + esc(d.text) + '“' : ''}</p>
 
