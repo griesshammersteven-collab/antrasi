@@ -73,8 +73,7 @@ function shell(inner) {
   <header class="sticky top-0 z-20 bg-paper/90 backdrop-blur border-b border-line">
     <div class="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
       <a href="#/" class="flex items-center gap-2.5 min-h-11" aria-label="Antrasi, zur Startseite">
-        <span class="grid place-items-center w-9 h-9 rounded-xl bg-pine text-paper">${ic(iCheck, 'w-5 h-5')}</span>
-        <span class="font-display text-2xl font-semibold tracking-tight">Antrasi</span>
+        <span class="font-display text-[1.7rem] font-semibold tracking-tight">Antrasi</span>
       </a>
       <nav class="flex items-center gap-1 text-sm font-semibold" aria-label="Hauptnavigation">
         <a href="#/" class="px-3 min-h-11 inline-flex items-center rounded-xl hover:bg-paper2">Entdecken</a>
